@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+a {
+    color: #c36800;
+    text-decoration: none;
+}
+
+body {
+    position: relative;
+    width: 21cm;
+    height: 27.9cm;
+    margin: 0 auto;
+    color: #555555;
+    background: #FFFFFF;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    /*font-family: SourceSansPro;*/
+}
+
+header {
+    padding: 5px 0;
+    margin-bottom: 5px;
+   /* border-bottom: 1px solid #AAAAAA;*/
+}
+
+#logo {
+    float: left;
+    margin-top: 0px;
+    width: 25%;
+}
+
+#logo img {
+    height: 50px;
+}
+
+#company {
+    float: left;
+    text-align: center;
+    width: 50%;
+    margin-top: 15px;
+    font-weight: 900;
+    font-size: large;
+}
+
+#folio {
+    float: left;
+    text-align:justify;
+    width: 25%;
+ 
+    
+}
+#folio table tr td{
+    font-size: 15px !important;
+    padding: 0px ;
+}
+
+#folio h1 {
+    color: #db6719;
+    font-size: 1.2em;
+    line-height: 1em;
+    font-weight: normal;
+    margin: 0 0 0 0;
+}
+
+#folio .date {
+    font-size: 1.0em;
+    color: #000000;
+}
+
+#details {
+    margin-bottom: 10px;
+}
+#details p{
+    margin-bottom: 5px;
+   
+}
+
+#client {
+    padding-left: 6px;
+    /*border-left: 6px solid #db6719;*/
+    float: left;
+    font-size: 15px;
+}
+
+#client .to {
+    color: #777777;
+}
+
+h2.name {
+    font-size: 1.4em;
+    font-weight: normal;
+    margin: 0;
+}
+
+#invoice {
+    float: right;
+    text-align: right;
+}
+
+#invoice h1 {
+    /* color: #db6719;*/
+    font-size: 1.2em;
+    line-height: 1em;
+    font-weight: normal;
+    margin: 0 0 10px 0;
+}
+
+#invoice .date {
+    font-size: 1.0em;
+    color: #777777;
+}
+
+table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 10px;
+    border: 1px solid #000000;
+}
+
+table th,
+table td {
+    padding: 5px;
+    /*background: #EEEEEE;*/
+    text-align: center;
+    border: 1px solid #000000;
+}
+
+table th {
+    white-space: nowrap;
+    font-weight: normal;
+    background-color: #c5c4c4;
+}
+
+table td {
+    text-align: right;
+    border: 1px solid #000000;
+}
+
+table td h3 {
+    /*color: #e46820;*/
+    font-size: 1.2em;
+    font-weight: normal;
+    margin: 0 0 0.2em 0;
+    border: 1px solid #000000;
+}
+
+table .no {
+    color: #FFFFFF;
+    font-size: 1.6em;
+    background: #57B223;
+}
+
+table .desc {
+    text-align: left;
+}
+table .medida{
+    text-align: center;
+}
+
+table .unit {
+    background: #DDDDDD;
+}
+
+
+/*table .qty {}*/
+
+table .total {
+    background: #067623;
+    color: #fff;
+}
+
+table td.unit,
+table td.qty,
+table td.total {
+    font-size: 1.0em;
+}
+
+table tbody tr:last-child td {
+    border: 1px solid #000000;
+}
+
+table tfoot td {
+    padding: 5px 5px;
+    background: #FFFFFF;
+    font-size: 1.0em;
+    white-space: nowrap;
+    border-bottom: 1px solid #000000;
+    border: none;
+}
+
+table tfoot tr:first-child td {
+    border: none;
+}
+
+table tfoot tr:last-child td {
+    color: #57B223;
+    font-size: 1.4em;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
+table tfoot tr td:first-child {
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
+#thanks {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#notices {
+    padding-left: 6px;
+    /*border-left: 6px solid #fad42c;*/
+}
+
+#notices .notice {
+    font-size: .8em;
+}
+
+.advertencia{
+    font-size: .8em;
+    text-align: center;
+}
+
+footer {
+    color: #777777;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    /*border-top: 1px solid #AAAAAA;*/
+    padding: 8px 0;
+    text-align: center;
+}
+
+.imagen{
+    max-width: 780px;
+    max-height: 1500px;
+    display: block !important;
+    margin: 0px auto !important;
+}
+/*
+.sborde {
+    border: none !important;
+}
+
+.cborde {
+    border-bottom: 1px solid #000000 !important;
+}*/
