@@ -39,10 +39,10 @@ if ($conexion != null) {
 
 
 
-        $consulta = "INSERT INTO bitacoraac (ip,navegador,fechacliente,usuario,nombre,obs) values ('$ip','$navegador','$hora','$idusuario','$usuario','CORRECTO')";
+       /* $consulta = "INSERT INTO bitacoraac (ip,navegador,fechacliente,usuario,nombre,obs) values ('$ip','$navegador','$hora','$idusuario','$usuario','CORRECTO')";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
-
+*/
         if ($recordar == 1) {
 
             setcookie("usuario", $usuario, time() + 604800, "/");
@@ -52,21 +52,7 @@ if ($conexion != null) {
             setcookie("pass", '', time() - 100, "/");
         }
 
-        if( $_SESSION['s_rol']==4)
-        {
-            $consulta = "SELECT * from vusuarioobra where id_usuario='$idusuario' and estado_reg='1'";
-            $resultado = $conexion->prepare($consulta);
-            $resultado->execute();
-            $registros=$resultado->fetchAll(PDO::FETCH_ASSOC);
-            $id_obra=0;
-            foreach($registros as $reg){
-                $id_obra=$reg['id_obra'];
-                $nom_obra=$reg['corto_obra'];
-            }
-            $_SESSION['id_obra'] = $id_obra;
-            $_SESSION['nom_obra'] = $nom_obra;
-
-        }
+    
     } else {
         $_SESSION['s_id_usuario'] = null;
         $_SESSION['s_usuario'] = null;
