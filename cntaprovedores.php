@@ -117,33 +117,43 @@ $message = "";
                     <form id="formDatos" action="" method="POST">
                         <div class="modal-body row">
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-2">
 
                                 <div class="form-group">
                                     <label for="rfc" class="col-form-label">RFC:</label>
                                     <input type="text" class="form-control" name="rfc" id="rfc" autocomplete="off" placeholder="RFC">
                                 </div>
+                            </div>
 
+                            <div class="col-sm-5">
                                 <div class="form-group">
                                     <label for="nombre" class="col-form-label">Nombre del proveedor:</label>
                                     <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="off" placeholder="Nombre Proveedor">
                                 </div>
+                            </div>
+
+                            <div class="col-sm-5">
                                 <div class="form-group">
                                     <label for="direccion" class="col-form-label">Dirección:</label>
                                     <input type="text" class="form-control" name="direccion" id="direccion" autocomplete="off" placeholder="Direccion">
                                 </div>
+                            </div>
+
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="telefono" class="col-form-label">Teléfono:</label>
                                     <input type="text" class="form-control" name="telefono" id="telefono" autocomplete="off" placeholder="Tel Fijo">
                                 </div>
+                            </div>
+
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="movil" class="col-form-label">Móvil:</label>
                                     <input type="text" class="form-control" name="movil" id="movil" autocomplete="off" placeholder="Tel Móvil">
                                 </div>
-                                
+                            </div>
 
-                            
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
 
                                 <div class="form-group">
                                     <label for="email" class="col-form-label">Correo:</label>

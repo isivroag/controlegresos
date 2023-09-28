@@ -114,14 +114,13 @@ $message = "";
                     </div>
                     <form id="formDatos" action="" method="POST">
                         <div class="modal-body row">
-
-                            <div class="col-sm-6">
-
+                            <div class="col-sm-8">
                                 <div class="form-group">
                                     <label for="descripcion" class="col-form-label">Descripción:</label>
                                     <input type="text" class="form-control" name="descripcion" id="descripcion" autocomplete="off" placeholder="descripcion">
                                 </div>
-
+                            </div>
+                            <div class="col-sm-4">
                                 <div class="form-group auto">
                                     <label for="tipo" class="col-form-label">Tipo:</label>
                                     <select class="form-control" name="tipo" id="tipo">
@@ -130,23 +129,25 @@ $message = "";
                                             <option id="2" value="servicio">Servicio</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="precio" class="col-form-label">Precio:</label>
                                     <input type="text" class="form-control" name="precio" id="precio" autocomplete="off" placeholder="Precio">
                                 </div>
+                            </div>
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="costo" class="col-form-label">Costo:</label>
                                     <input type="text" class="form-control" name="costo" id="costo" autocomplete="off" placeholder="Costo">
                                 </div>
+                            </div>   
+                            <div class="col-sm-4">  
                                 <div class="form-group">
                                     <label for="existencia" class="col-form-label">Existencia:</label>
                                     <input type="text" class="form-control" name="existencia" id="existencia" autocomplete="off" placeholder="Existencia">
                                 </div>
-                               
-                                
-
                             </div>
-    
                         </div>
 
 
