@@ -17,7 +17,7 @@ include_once "templates/navegacion.php";
     <div class="container-fluid pt-2">
       <div class="card">
         <div class="card-header bg-gradient-secondary">
-          <h4></h4>
+          <h4>Control Egresos</h4>
         </div>
 
 

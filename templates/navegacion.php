@@ -50,14 +50,14 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <a href="cntaempresa.php" class="nav-link <?php echo ($pagina == 'empresa') ? "active seleccionado" : ""; ?>  ">
+                <a href="cntaprovedores.php" class="nav-link <?php echo ($pagina == 'proveedor') ? "active seleccionado" : ""; ?>  ">
                   <i class="fas fa-city nav-icon"></i>
                   <p>Proveedor</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="cntaproyecto.php" class="nav-link <?php echo ($pagina == 'proyecto') ? "active seleccionado" : ""; ?>  ">
+                <a href="cntaitems.php" class="nav-link <?php echo ($pagina == 'items') ? "active seleccionado" : ""; ?>  ">
                   <i class="fas fa-road nav-icon"></i>
                   <p>Items</p>
                 </a>

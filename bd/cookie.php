@@ -1,6 +1,6 @@
 <?php
 
-$id_usuario = (isset($_COOKIE["usuario"])) ? $_COOKIE["usuario"] : '';
+$id_usuario = (isset($_COOKIE["username"])) ? $_COOKIE["username"] : '';
 $pass = (isset($_COOKIE["pass"])) ? $_COOKIE["pass"] : '';
 if ($id_usuario != '' && $pass!='') {
     session_start();
@@ -12,7 +12,7 @@ if ($id_usuario != '' && $pass!='') {
     $conexion = $objeto->connect();
     if ($conexion != null) {
         //recepcion de los datos en el medodo post desde ajax code 
-        $id_usuario = (isset($_COOKIE['usuario'])) ? $_COOKIE['usuario'] : '';
+        $id_usuario = (isset($_COOKIE['username'])) ? $_COOKIE['username'] : '';
         $pass = (isset($_COOKIE['pass'])) ? $_COOKIE['pass'] : '';
 
 

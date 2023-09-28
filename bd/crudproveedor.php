@@ -5,43 +5,43 @@ $conexion = $objeto->connect();
 
 // Recepción de los datos enviados mediante POST desde el JS   
 
+$rfc = (isset($_POST['rfc'])) ? $_POST['rfc'] : '';
 $nombre = (isset($_POST['nombre'])) ? $_POST['nombre'] : '';
-$username = (isset($_POST['username'])) ? $_POST['username'] : '';
+$direccion = (isset($_POST['direccion'])) ? $_POST['direccion'] : '';
+$telefono = (isset($_POST['telefono'])) ? $_POST['telefono'] : '';
+$movil = (isset($_POST['movil'])) ? $_POST['movil'] : '';
 $email = (isset($_POST['email'])) ? $_POST['email'] : '';
-$password = (isset($_POST['password'])) ? $_POST['password'] : '';
-$rol_usuario = (isset($_POST['rol_usuario'])) ? $_POST['rol_usuario'] : '';
-$nombre = $nombre;
 
-$id_usuario = (isset($_POST['id_usuario'])) ? $_POST['id_usuario'] : '';
+$id_prov = (isset($_POST['id_prov'])) ? $_POST['id_prov'] : '';
 
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
 
 switch($opcion){
     case 1: //alta
 
-        $passwordh=md5($password);
-        $consulta = "INSERT INTO w_usuario (username,nombre,email,password,rol_usuario) VALUES('$username','$nombre', '$email', '$passwordh','$rol_usuario') ";			
+        
+        $consulta = "INSERT INTO proveedor (rfc,nombre,direccion,telefono,movil,email) VALUES('$rfc','$nombre', '$direccion', '$telefono','$movil','$email') ";			
         $resultado = $conexion->prepare($consulta);
         $resultado->execute(); 
 
-        $consulta = "SELECT * FROM w_usuario JOIN rol ON w_usuario.rol_usuario=rol.id WHERE w_usuario.id_usuario<>'".$_SESSION['s_id_usuario']."' ORDER BY w_usuario.id_usuario DESC LIMIT 1";
+        $consulta = "SELECT * FROM proveedor ORDER BY id_prov DESC LIMIT 1";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         break;
     case 2: //modificación
-        $passwordh=md5($password);
-        $consulta = "UPDATE w_usuario SET nombre='$nombre',email='$email', username='$username', rol_usuario='$rol_usuario', password='$passwordh' WHERE id_usuario='$id_usuario' ";		
+        
+        $consulta = "UPDATE proveedor SET rfc='$rfc',nombre='$nombre', direccion='$direccion', telefono='$telefono', movil='$movil', email='$email' WHERE id_prov='$id_prov' ";		
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();        
         
-        $consulta = "SELECT * FROM w_usuario JOIN rol ON w_usuario.rol_usuario=rol.id WHERE id_usuario='$id_usuario' ";       
+        $consulta = "SELECT * FROM proveedor WHERE id_prov='$id_prov' ";       
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         break;        
     case 3://baja
-        $consulta = "DELETE FROM w_usuario WHERE id_usuario='$id_usuario' ";		
+        $consulta = "UPDATE proveedor SET estado_prov=0 WHERE id_prov='$id_prov' ";		
         $resultado = $conexion->prepare($consulta);
         $resultado->execute(); 
         $data=1;                          
