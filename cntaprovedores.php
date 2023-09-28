@@ -39,7 +39,7 @@ $message = "";
         <div class="card">
             <div class="card-header bg-gradient-green">
                 <div class="card-title">
-                <h1 class="card-title  mx-auto">Proveedores</h1>
+                    <h1 class="card-title  mx-auto">Proveedores</h1>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@ $message = "";
                                 <table name="tablaProveedor" id="tablaProveedor" class="table table-sm table-striped table-bordered table-condensed text-nowrap w-auto mx-auto" style="width:100%">
                                     <thead class="text-center bg-gradient-green">
                                         <tr>
-                                            <th>Id</th> 
+                                            <th>Id</th>
                                             <th>RFC</th>
                                             <th>Nombre</th>
                                             <th>Direccion</th>
@@ -98,7 +98,7 @@ $message = "";
 
             </div>
             <!-- /.card-body -->
-           
+
             <!-- /.card-footer-->
         </div>
         <!-- /.card -->
@@ -115,52 +115,62 @@ $message = "";
 
                     </div>
                     <form id="formDatos" action="" method="POST">
-                        <div class="modal-body row">
+                        <div class="modal-body">
+                            <div class="row justify-content">
 
-                            <div class="col-sm-2">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="rfc" class="col-form-label">RFC:</label>
+                                        <input type="text" class="form-control" name="rfc" id="rfc" autocomplete="off" placeholder="RFC">
+                                    </div>
+                                </div>
 
-                                <div class="form-group">
-                                    <label for="rfc" class="col-form-label">RFC:</label>
-                                    <input type="text" class="form-control" name="rfc" id="rfc" autocomplete="off" placeholder="RFC">
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="nombre" class="col-form-label">Nombre del proveedor:</label>
+                                        <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="off" placeholder="Nombre Proveedor">
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-5">
-                                <div class="form-group">
-                                    <label for="nombre" class="col-form-label">Nombre del proveedor:</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="off" placeholder="Nombre Proveedor">
+                            <div class="row justify-content-center">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="direccion" class="col-form-label">Dirección:</label>
+                                        <textarea name="direccion" class="form-control"  id="direccion" rows="2" placeholder="Direccion"></textarea>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="row justify-content-center">
 
-                            <div class="col-sm-5">
-                                <div class="form-group">
-                                    <label for="direccion" class="col-form-label">Dirección:</label>
-                                    <input type="text" class="form-control" name="direccion" id="direccion" autocomplete="off" placeholder="Direccion">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="telefono" class="col-form-label">Teléfono:</label>
+                                        <input type="text" class="form-control" name="telefono" id="telefono" autocomplete="off" placeholder="Tel Fijo">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="telefono" class="col-form-label">Teléfono:</label>
-                                    <input type="text" class="form-control" name="telefono" id="telefono" autocomplete="off" placeholder="Tel Fijo">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="movil" class="col-form-label">Móvil:</label>
+                                        <input type="text" class="form-control" name="movil" id="movil" autocomplete="off" placeholder="Tel Móvil">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="movil" class="col-form-label">Móvil:</label>
-                                    <input type="text" class="form-control" name="movil" id="movil" autocomplete="off" placeholder="Tel Móvil">
-                                </div>
-                            </div>
+                                <div class="col-sm-6">
 
-                            <div class="col-sm-4">
-
-                                <div class="form-group">
-                                    <label for="email" class="col-form-label">Correo:</label>
-                                    <input type="email" class="form-control" name="email" id="email">
+                                    <div class="form-group">
+                                        <label for="email" class="col-form-label">Correo:</label>
+                                        <input type="email" class="form-control" name="email" id="email">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+
+
 
 
                         <?php
@@ -190,7 +200,7 @@ $message = "";
 
 
 <?php include_once 'templates/footer.php'; ?>
-<script src="fjs/proveedor.js?v=<?php echo(rand()); ?>"></script>
+<script src="fjs/proveedor.js?v=<?php echo (rand()); ?>"></script>
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
