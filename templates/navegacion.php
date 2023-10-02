@@ -71,10 +71,10 @@
           </li>
         <?php } ?>
 
-        <li class="nav-item has-treeview <?php echo ($pagina == 'cntacompras') ? "menu-open" : ""; ?>">
+        <li class="nav-item has-treeview <?php echo ($pagina == 'cxp') ? "menu-open" : ""; ?>">
 
 
-          <a href="#" class="nav-link <?php echo ($pagina == 'cntacompras') ? "active" : ""; ?>">
+          <a href="#" class="nav-link <?php echo ($pagina == 'cxp') ? "active" : ""; ?>">
 
             <i class="fa-solid fa-file-lines nav-icon"></i>
             <p>
@@ -87,7 +87,7 @@
 
 
             <li class="nav-item">
-              <a href="cntaordencompra.php" class="nav-link <?php echo ($pagina == 'cntacompras') ? "active seleccionado" : ""; ?>  ">
+              <a href="cntacxp.php" class="nav-link <?php echo ($pagina == 'cxp') ? "active seleccionado" : ""; ?>  ">
 
                 <i class="fa-regular fa-pen-to-square text-green  nav-icon"></i>
                 <p>Compras</p>
