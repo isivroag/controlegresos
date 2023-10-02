@@ -12,7 +12,7 @@ $costo = (isset($_POST['costo'])) ? $_POST['costo'] : '';
 $existencia = (isset($_POST['existencia'])) ? $_POST['existencia'] : '';
 
 
-$id_item = (isset($_POST['id_prov'])) ? $_POST['id_prov'] : '';
+$id_item = (isset($_POST['id_item'])) ? $_POST['id_item'] : '';
 
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
 
@@ -31,11 +31,11 @@ switch($opcion){
         break;
     case 2: //modificación
         
-        $consulta = "UPDATE items SET descripcion='$descripcion',tipo='$tipo', precio='$precio', costo='$costo', existencia='$existencia'";		
+        $consulta = "UPDATE items SET descripcion='$descripcion',tipo='$tipo', precio='$precio', costo='$costo', existencia='$existencia' WHERE id_item='$id_item'";		 //corregir consulta update 
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();        
         
-        $consulta = "SELECT * FROM items WHERE id_prov='$id_item' ";       
+        $consulta = "SELECT * FROM items ORDER BY id_item ";       
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);

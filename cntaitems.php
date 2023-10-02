@@ -125,8 +125,8 @@ $message = "";
                                     <label for="tipo" class="col-form-label">Tipo:</label>
                                     <select class="form-control" name="tipo" id="tipo">
                                         
-                                            <option id="1" value="articulo">Articulo</option>
-                                            <option id="2" value="servicio">Servicio</option>
+                                            <option id="1" value="Articulo">Articulo</option>
+                                            <option id="2" value="Servicio">Servicio</option>
                                     </select>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@ $message = "";
 
 
 <?php include_once 'templates/footer.php'; ?>
-<script src="fjs/items.js?v=<?php echo(rand()); ?>"></script>
+<script src="fjs/cntaitems.js?v=<?php echo(rand()); ?>"></script>
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>

@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    var id_prov, opcion;
+    var id_item, opcion;
     opcion = 4;
 
-    tablaProv = $("#tablaProveedor").DataTable({
+    tablaitems = $("#tablaItems").DataTable({
 
 
 
@@ -11,9 +11,8 @@ $(document).ready(function() {
                 "data": null,
                 "defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-sm btn-primary  btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-sm btn-danger btnBorrar'><i class='fas fa-trash-alt'></i></button></div></div>"
             },
-            { className: "hide_column", targets: [7] },
-           
-         
+            { className: "hide_column", targets: [6] },
+
 
         ],
 
@@ -41,9 +40,9 @@ $(document).ready(function() {
         $("#formDatos").trigger("reset");
         $(".modal-header").css("background-color", "#28a745");
         $(".modal-header").css("color", "white");
-        $(".modal-title").text("Nuevo Proveedor");
+        $(".modal-title").text("Nuevo Item");
         $("#modalU").modal("show");
-        id_prov = null;
+        id_item = null;
         opcion = 1; //alta
     });
 
@@ -52,28 +51,27 @@ $(document).ready(function() {
     //botón EDITAR    
     $(document).on("click", ".btnEditar", function() {
         fila = $(this).closest("tr");
-        id_prov = parseInt(fila.find('td:eq(0)').text());
-        rfc = fila.find('td:eq(1)').text();
-        nombre = fila.find('td:eq(2)').text();
-        direccion = fila.find('td:eq(3)').text();
-        telefono = fila.find('td:eq(4)').text();
-        movil = fila.find('td:eq(5)').text();
-        email = fila.find('td:eq(6)').text();
-        edo_prov = fila.find('td:eq(7)').text();
+        id_item = parseInt(fila.find('td:eq(0)').text());
+
+        descripcion = fila.find('td:eq(1)').text();
+        tipo = fila.find('td:eq(2)').text();
+        precio = fila.find('td:eq(3)').text();
+        costo = fila.find('td:eq(4)').text();
+        existencia = fila.find('td:eq(5)').text();
+        estado_item = fila.find('td:eq(6)').text();
+
         
-       
-        $("#rfc").val(rfc);
-        $("#nombre").val(nombre);
-        $("#direccion").val(direccion);
-        $("#telefono").val(telefono);
-        $("#movil").val(movil);
-        $("#email").val(email);
+        $("#descripcion").val(descripcion);
+        $("#tipo").val(tipo);
+        $("#precio").val(precio);
+        $("#costo").val(costo);
+        $("#existencia").val(existencia);
 
         opcion = 2; //editar
 
         $(".modal-header").css("background-color", "#007bff");
         $(".modal-header").css("color", "white");
-        $(".modal-title").text("Editar Items");
+        $(".modal-title").text("Editar Item");
         $("#modalU").modal("show");
 
     });
@@ -82,23 +80,23 @@ $(document).ready(function() {
     $(document).on("click", ".btnBorrar", function() {
         fila = $(this);
 
-        id_prov = parseInt($(this).closest("tr").find('td:eq(0)').text());
+        id_item = parseInt($(this).closest("tr").find('td:eq(0)').text());
         opcion = 3 //borrar
             //agregar codigo de sweatalert2
-        var respuesta = confirm("¿Está seguro de eliminar el registro: " + id + "?");
+        var respuesta = confirm("¿Está seguro de eliminar el registro: " + id_item + "?");
 
         if (respuesta) {
             $.ajax({
 
-                url: "bd/crudproveedor.php",
+                url: "bd/cruditem.php",
                 type: "POST",
                 dataType: "json",
-                data: { id: id, opcion: opcion },
+                data: { id_item: id_item, opcion: opcion },
 
                 success: function() {
                     console.log(data);
 
-                    tablaProv.row(fila.parents('tr')).remove().draw();
+                    tablaI.row(fila.parents('tr')).remove().draw();
                 }
             });
         }
@@ -108,19 +106,18 @@ $(document).ready(function() {
         e.preventDefault();
 
 
+        
+        descripcion = $.trim($("#descripcion").val());
+        tipo = $.trim($("#tipo").val());
+        precio = $.trim($("#precio").val());
+        costo = $.trim($("#costo").val());
+        existencia = $.trim($("#existencia").val());
 
-        rfc = $.trim($("#rfc").val());
-        nombre = $.trim($("#nombre").val());
-        direccion = $.trim($("#direccion").val());
-        telefono = $.trim($("#telefono").val());
-        movil = $.trim($("#movil").val());
-        email = $.trim($("#email").val());
-
-        if (rfc.length == 0 || nombre.length == 0 || direccion.length == 0 ||
-            telefono.length == 0 || movil.length == 0 || email.length == 0) {
+        if (descripcion.length == 0 || tipo.length == 0 || precio.length == 0 ||
+            costo.length == 0 || existencia.length == 0 ) {
             Swal.fire({
                 title: 'Datos Faltantes',
-                text: "Debe ingresar todos los datos del Prospecto",
+                text: "Debe ingresar todos los datos del item",
                 icon: 'warning',
             })
             return false;
@@ -129,30 +126,29 @@ $(document).ready(function() {
         } else {
             
                 $.ajax({
-                    url: "bd/crudproveedor.php",
+                    url: "bd/cruditem.php",
                     type: "POST",
                     dataType: "json",
-                    data: { id_prov: id_prov, rfc: rfc, nombre: nombre, direccion: direccion, telefono: telefono, movil: movil, email: email, opcion: opcion },
-                    success: function(data) {
+                    data: { id_item: id_item, descripcion: descripcion, tipo: tipo, precio: precio, costo: costo, existencia: existencia, opcion: opcion } ,
+                    success: function(data){
                         console.log(data);
 
-                        //tablaProv.ajax.reload(null, false);
-                        id_prov = data[0].id_prov;
-                        rfc = data[0].rfc;
-                        nombre = data[0].nombre;
-                        direccion = data[0].direccion;
-                        telefono = data[0].telefono;
-                        movil = data[0].movil;
-                        email = data[0].email;
+                        //tablaI.ajax.reload(null, false);
                         
+                        id_item = data[0].id_item;
+                        descripcion = data[0].descripcion;
+                        tipo = data[0].tipo;
+                        precio = data[0].precio;
+                        costo = data[0].costo;
+                        existencia = data[0].existencia;
                         
-                        
+
 
 
                         if (opcion == 1) {
-                            tablaProv.row.add([id_prov , rfc, nombre, direccion, telefono, movil, email, edo_prov]).draw();
+                            tablaitems.row.add([id_item, descripcion, tipo, precio, costo, existencia, estado_item ]).draw();
                         } else {
-                            tablaProv.row(fila).data([id_prov , rfc, nombre, direccion, telefono, movil, email, edo_prov  ]).draw();
+                            tablaitems.row(fila).data([id_item, descripcion, tipo, precio, costo, existencia, estado_item ]).draw();
                         }
 
                     }

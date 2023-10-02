@@ -84,15 +84,15 @@ $(document).ready(function() {
         id_usuario = parseInt($(this).closest("tr").find('td:eq(0)').text());
         opcion = 3 //borrar
             //agregar codigo de sweatalert2
-        var respuesta = confirm("¿Está seguro de eliminar el registro: " + id + "?");
+        var respuesta = confirm("¿Está seguro de eliminar el registro: " + id_usuario + "?");
 
         if (respuesta) {
             $.ajax({
 
-                url: "bd/crudusu.php",
+                url: "bd/crudusuario.php",
                 type: "POST",
                 dataType: "json",
-                data: { id: id, opcion: opcion },
+                data: { id_usuario: id_usuario, opcion: opcion },
 
                 success: function() {
                     console.log(data);
