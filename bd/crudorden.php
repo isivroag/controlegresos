@@ -11,8 +11,8 @@ $fecha = (isset($_POST['fecha'])) ? $_POST['fecha'] : '';
 
 $id_prov = (isset($_POST['id_prov'])) ? $_POST['id_prov'] : '';
 $proveedor = (isset($_POST['proveedor'])) ? $_POST['proveedor'] : '';
-$id_proy = (isset($_POST['id_proy'])) ? $_POST['id_proy'] : '';
-$proyecto = (isset($_POST['proyecto'])) ? $_POST['proyecto'] : '';
+//$id_proy = (isset($_POST['id_proy'])) ? $_POST['id_proy'] : '';
+//$proyecto = (isset($_POST['proyecto'])) ? $_POST['proyecto'] : '';
 $concepto = (isset($_POST['concepto'])) ? $_POST['concepto'] : '';
 
 $total = (isset($_POST['total'])) ? $_POST['total'] : '';

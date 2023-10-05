@@ -59,7 +59,7 @@ $message = "";
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
-                                <table name="tablaProveedor" id="tablaProveedor" class="table table-sm table-striped table-bordered table-condensed text-nowrap w-auto mx-auto" style="width:100%">
+                                <table name="tablaCxp" id="tablaCxp" class="table table-sm table-striped table-bordered table-condensed text-nowrap w-auto mx-auto" style="width:100%">
                                     <thead class="text-center bg-gradient-green">
                                         <tr>
                                             <th>Folio</th>
@@ -105,6 +105,103 @@ $message = "";
         </div>
         <!-- /.card -->
 
+    </section>
+
+    <section>
+        <div class="modal fade" id="modalU" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-gradient-green">
+                        <h5 class="modal-title" id="exampleModalLabel">CUENTA POR PAGAR</h5>
+
+                    </div>
+                    <form id="formDatos" action="" method="POST">
+                        <div class="modal-body">
+                            <div class="row justify-content">
+
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="folio" class="col-form-label">Folio:</label>
+                                        <input type="text" class="form-control" name="folio" id="folio" autocomplete="off" placeholder="folio" disabled>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="fecha" class="col-form-label">Fecha:</label>
+                                        <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $fecha; ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="proveedor" class="col-form-label">Proveedor:</label>
+                                        <textarea name="proveedor" class="form-control"  id="proveedor" rows="2" placeholder="proveedor"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="descripcion" class="col-form-label">Descripcion:</label>
+                                        <input type="text" class="form-control" name="descripcion" id="descripcion" autocomplete="off" placeholder="Descripcion">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="gtotal" class="col-form-label">Gran Total:</label>
+                                        <input type="text" class="form-control" name="gtotal" id="gtotal" autocomplete="off" placeholder="Gran Total">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+
+                                    <div class="form-group">
+                                        <label for="saldo" class="col-form-label">Saldo:</label>
+                                        <input type="text" class="form-control" name="saldo" id="saldo">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="facturado" class="col-form-label">Facturado:</label>
+                                        <input type="text" class="form-control" name="facturado" id="facturado" autocomplete="off" placeholder="Facturado" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <?php
+                        if ($message != "") {
+                        ?>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <span class="badge "><?php echo ($message); ?></span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+
+                            </div>
+
+                        <?php
+                        }
+                        ?>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
+                            <button type="submit" id="btnGuardar" name="btnGuardar" class="btn btn-success" value="btnGuardar"><i class="far fa-save"></i> Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
 
 

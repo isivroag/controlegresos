@@ -16,7 +16,7 @@ $tokenid = md5($_SESSION['s_usuario']);
 if ($folio != "") {
 
     $opcion = 2;
-    $consulta = "SELECT * FROM orden where folio_ord='$folio'";
+    $consulta = "SELECT * FROM orden where folio_cxp='$folio'";
 
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
@@ -25,13 +25,12 @@ if ($folio != "") {
     $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($data as $dt) {
-        $folio = $dt['folio_ord'];
+        $folio = $dt['folio_cxp'];
 
         $fecha = $dt['fecha'];
         $id_prov = $dt['id_prov'];
-        $proveedor = $dt['nom_prov'];
-        $id_proy = $dt['id_proyecto'];
-        $proyecto = $dt['nom_proy'];
+        $proveedor = $dt['nombre'];
+        
         $concepto = $dt['concepto'];
         $total = $dt['total'];
     }
@@ -79,8 +78,8 @@ if ($folio != "") {
         $fecha = $dt['fecha'];
         $id_prov = "";
         $proveedor = "";
-        $id_proy = "";
-        $proyecto = "";
+        
+        
         $concepto = "";
         $total =  $dt['total'];
     }
@@ -418,18 +417,20 @@ $datades = $resdes->fetchAll(PDO::FETCH_ASSOC);
                                                                 <thead class="text-center bg-gradient-secondary">
                                                                     <tr>
                                                                         <th>Id</th>
-                                                                        <th>Clave</th>
-                                                                        <th>Concepto </th>
+                                                                        <th>Folio</th>
+                                                                        <th>id_item </th>
                                                                         <th>Cantidad</th>
-                                                                        <th>Unidad</th>
+                                                                        <th>Precio</th>
                                                                         <th>Precio U.</th>
                                                                         <th>Importe</th>
+                                                                        <th>Descuento</th>
+                                                                        <th>GImporte</th>
                                                                         <th>Acciones</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php
-                                                                    $consultadeto = "SELECT * FROM orden_detalle where folio_ord='$folio' and estado_reg=1 order by id_reg";
+                                                                    $consultadeto = "SELECT * FROM cxp_detalle where folio_cxp='$folio' and estado_reg=1 order by id_reg";
                                                                     $resultadodeto = $conexion->prepare($consultadeto);
                                                                     $resultadodeto->execute();
                                                                     $datadeto = $resultadodeto->fetchAll(PDO::FETCH_ASSOC);
@@ -617,9 +618,9 @@ $datades = $resdes->fetchAll(PDO::FETCH_ASSOC);
                                     <tr>
 
                                         <th>Id</th>
-                                        <th>Clave</th>
                                         <th>Concepto</th>
-                                        <th>Unidad</th>
+                                        <th>Tipo</th>
+                                        <th>Precio</th>
                                         <th>Seleccionar</th>
                                     </tr>
                                 </thead>
@@ -629,10 +630,10 @@ $datades = $resdes->fetchAll(PDO::FETCH_ASSOC);
                                     ?>
                                         <tr>
 
-                                            <td><?php echo $datd['id_concepto'] ?></td>
-                                            <td><?php echo $datd['clave_concepto'] ?></td>
-                                            <td><?php echo $datd['nom_concepto'] ?></td>
-                                            <td><?php echo $datd['unidad'] ?></td>
+                                            <td><?php echo $datd['id_item'] ?></td>
+                                            <td><?php echo $datd['descripcion'] ?></td>
+                                            <td><?php echo $datd['tipo'] ?></td>
+                                            <td><?php echo $datd['precio'] ?></td>
                                             <td></td>
                                         </tr>
                                     <?php

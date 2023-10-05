@@ -17,7 +17,8 @@ $resultadoc = $conexion->prepare($consultac);
 $resultadoc->execute();
 $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
 
-
+$opcion="";
+$folio=1;
 
 ?>
 
@@ -128,11 +129,11 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
             </div>
 
             <div class="card-body">
-
+        
                 <div class="row">
                     <div class="col-lg-12">
                         <?php if ($opcion == 1) { ?>
-                            <button type="button" id="btnGuardar" name="btnGuardar" class="btn btn-success" value="btnGuardar" <?php //echo $opcion == 2 ? 'disabled' : '' ?>><i class="far fa-save"></i> Guardar</button>
+                            <button type="button" id="btnGuardar" name="btnGuardar" class="btn btn-success" value="btnGuardar" <?php echo $opcion == 2 ? 'disabled' : '' ?>><i class="far fa-save"></i> Guardar</button>
                         <?php } ?>
 
                     </div>
@@ -141,7 +142,7 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
                 <br>
 
 
-
+            <!-- FORM DATOS PROVEDOR-->
                 <form id="formDatos" action="" method="POST">
 
 
@@ -162,9 +163,9 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
 
                                     <div class="col-sm-2">
                                         <div class="form-group input-group-sm">
-                                            <label for="folior" class="col-form-label">Folio:</label>
-                                            <input type="hidden" class="form-control" name="folio" id="folio" value="<?php ////echo $folio; ?>">
-                                            <input type="text" class="form-control" name="folior" id="folior" value="<?php //echo   $folio; ?>">
+                                            <label for="folio" class="col-form-label">Folio:</label>
+                                            <input type="hidden" class="form-control" name="folio" id="folio" value="<?php echo $folio; ?>">
+                                            <input type="text" class="form-control" name="folio" id="folio" value="<?php echo   $folio; ?>" disabled>
                                         </div>
                                     </div>
                                     <div class="col-sm-4"></div>
@@ -172,7 +173,7 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
                                     <div class="col-sm-2">
                                         <div class="form-group input-group-sm">
                                             <label for="fecha" class="col-form-label">Fecha:</label>
-                                            <input type="date" class="form-control" name="fecha" id="fecha" value="<?php //echo $fecha; ?>">
+                                            <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $fecha; ?>">
                                         </div>
                                     </div>
                                     <div class="col-sm-2"></div>
@@ -181,8 +182,8 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
                                     <div class="col-sm-8">
                                         <div class="form-group">
                                             <input type="hidden" class="form-control" name="tokenid" id="tokenid" value="<?php //echo $tokenid; ?>">
-                                            <input type="hidden" class="form-control" name="opcion" id="opcion" value="<?php //echo $opcion; ?>">
-                                            <input type="text" class="form-control" name="id_prov" id="id_prov" value="<?php //echo $id_prov; ?>">
+                                            <input type="hidden" class="form-control" name="opcion" id="opcion" value="<?php echo $opcion; ?>">
+                                            <input type="text" class="form-control" name="id_prov" id="id_prov" value="<?php //echo $id_prov; ?>" disabled>
                                             <label for="nombre" class="col-form-label">Proveedor:</label>
 
                                             <div class="input-group input-group-sm">
@@ -214,7 +215,7 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
                                         </div>
 
                                     </div>
-
+                <!-- TERMINA FORM DATOS PROVEDOR -->
 
 
                                 </div>
@@ -233,14 +234,14 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
 
                                                 </div>
                                             </div>
-
+                        <!-- INICIA AGREGAR CONCEPTO-->
                                             <div class="card-body" style="margin:0px;padding:3px;">
 
                                                 <div class="card card-widget collapsed-card " style="margin:2px;padding:5px;">
 
                                                     <div class="card-header " style="margin:0px;padding:8px;">
 
-                                                        <button type="button" class="btn bg-gradient-secondary btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                                        <button type="button" class="btn bg-gradient-secondary btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Buscar Item">
                                                             Agregar Concepto <i class="fas fa-plus"></i>
                                                         </button>
 
@@ -249,7 +250,7 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
                                                     <div class="card-body " style="margin:0px;padding:2px 5px;">
                                                         <div class="row justify-content-sm-center">
 
-                                                            <div class="col-lg-5">
+                                                            <div class="col-lg-3">
                                                                 <div class="input-group input-group-sm">
 
                                                                     <input type="hidden" class="form-control" name="idconcepto" id="idconcepto">
@@ -267,7 +268,7 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
 
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-1">
+                                                            <div class="col-sm-2">
                                                             <label for="unidadm" class="col-form-label">Unidad:</label>
                                                                 <div class="input-group input-group-sm">
                                                                     <input type="text" class="form-control" name="unidadm" id="unidadm" disabled>
@@ -276,17 +277,24 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
 
 
 
-                                                            <div class="col-lg-2">
+                                                            <div class="col-lg-1">
                                                                 <label for="costou" class="col-form-label">Precio:</label>
                                                                 <div class="input-group input-group-sm">
                                                                     <input type="text" class="form-control" name="costou" id="costou" disabled>
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-lg-2">
+                                                            <div class="col-lg-1">
                                                                 <label for="cantidadconcepto" class="col-form-label">Cantidad:</label>
                                                                 <div class="input-group input-group-sm">
-                                                                    <input type="text" class="form-control" name="cantidadconcepto" id="cantidadconcepto" disabled>
+                                                                    <input type="text" class="form-control" name="cantidadconcepto" id="cantidadconcepto" >
+                                                                </div>
+                                                            </div>
+                                                            
+                                                                <div class="col-lg-1">
+                                                                <label for="desc" class="col-form-label">Desc%:</label>
+                                                                <div class="input-group input-group-sm">
+                                                                    <input type="text" class="form-control" name="desc" id="Descuento" >
                                                                 </div>
                                                             </div>
 
@@ -296,6 +304,7 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
                                                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar Item">
                                                                         <button type="button" id="btnagregarides" name="btnagregarides" class="btn btn-sm bg-gradient-orange" value="btnGuardari"><i class="fas fa-plus-square"></i></button>
                                                                     </span>
+                                                                    
                                                                     <span class="d-inline-block" tabindex="1" data-toggle="tooltip" title="Limpiar">
                                                                         <button type="button" id="btlimpiarides" name="btlimpiarides" class="btn btn-sm bg-gradient-secondary" value="btnlimpiari"><i class="fas fa-brush"></i></button>
                                                                     </span>
@@ -317,31 +326,35 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
                                                                 <thead class="text-center bg-gradient-secondary">
                                                                     <tr>
                                                                         <th>Id</th>
+                                                                        <th>Folio</th>
                                                                         <th>Clave</th>
                                                                         <th>Concepto </th>
                                                                         <th>Cantidad</th>
                                                                         <th>Unidad</th>
                                                                         <th>Precio U.</th>
+                                                                        <th>Desc%</th>
                                                                         <th>Importe</th>
                                                                         <th>Acciones</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php
-                                                                    $consultadeto = "SELECT * FROM orden_detalle where folio_ord='$folio' and estado_reg=1 order by id_reg";
+                                                                    $consultadeto = "SELECT * FROM cxp_detalle where folio_cxp='$folio' and estado_reg=1 order by id_reg";
                                                                     $resultadodeto = $conexion->prepare($consultadeto);
                                                                     $resultadodeto->execute();
                                                                     $datadeto = $resultadodeto->fetchAll(PDO::FETCH_ASSOC);
                                                                     foreach ($datadeto as $rowdet) {
                                                                     ?>
                                                                         <tr>
-                                                                            <td><?php //echo $rowdet['id_reg'] ?></td>
-                                                                            <td><?php //echo $rowdet['clave'] ?></td>
-                                                                            <td><?php //echo $rowdet['concepto'] ?></td>
-                                                                            <td class="text-right"><?php //echo number_format($rowdet['cantidad'],2) ?></td>
-                                                                            <td ><?php //echo $rowdet['unidad'] ?></td>
-                                                                            <td class="text-right"><?php //echo number_format($rowdet['precio'],2) ?></td>
-                                                                            <td class="text-right"><?php //echo number_format($rowdet['monto'],2) ?></td>
+                                                                            <td><?php echo $rowdet['id_reg'] ?></td>
+                                                                            <td><?php echo $rowdet['folio_cxp'] ?></td>
+                                                                            <td><?php echo $rowdet['id_item'] ?></td>
+                                                                            <td><?php echo $rowdet['descripcion'] ?></td>
+                                                                            <td class="text-right"><?php echo number_format($rowdet['cantidad'],2) ?></td>
+                                                                            <td ><?php/echo $rowdet['unidad'] ?></td>
+                                                                            <td class="text-right"><?php echo number_format($rowdet['precio'],2) ?></td>
+                                                                            <td class="text-right"><?php echo number_format($rowdet['descuento'],2) ?></td>
+                                                                            <td class="text-right"><?php echo number_format($rowdet['importe'],2) ?></td>
                                                                             <td></td>
                                                                         </tr>
                                                                     <?php
@@ -394,18 +407,14 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                         </div>
                     </div>
+                <!-- TERMINA AGREAR CONCEPTO-->
                 </form>
 
-
-
-                <!-- MATERIALES USADOS-->
-
-                <!-- TERMINA MATERIALES USADOS -->
             </div>
 
         </div>
     </section>
-    <!-- TERMINA ALTA CXP -->
+
 
     <!-- INICIA TABLA PROVEEDOR-->
     <section>
@@ -451,53 +460,8 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
     </section>
     <!-- TERMINA TABLA PROVEEDOR-->
 
-    <!-- INICIA TABLA PROYECTO -->
-    <section>
-        <div class="container">
 
-            <!-- Default box -->
-            <div class="modal fade" id="modalProyecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-md" role="document">
-                    <div class="modal-content w-auto">
-                        <div class="modal-header bg-gradient-secondary">
-                            <h5 class="modal-title" id="exampleModalLabel">BUSCAR PROYECTO</h5>
-
-                        </div>
-                        <br>
-                        <div class="table-hover table-responsive w-auto" style="padding:15px">
-                            <table name="tablaCon" id="tablaCon" class="table table-sm text-nowrap table-striped table-bordered table-condensed" style="width:100%">
-                                <thead class="text-center bg-gradient-primary">
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Clave</th>
-                                        <th>Proyecto</th>
-                                        <th>Seleccionar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    foreach ($dataproyecto as $datc) {
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $datc['id_proy'] ?></td>
-                                            <td><?php echo $datc['clave_proy'] ?></td>
-                                            <td><?php echo $datc['nom_proy'] ?></td>
-                                            <td></td>
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- TERMINA TABLA PROYECTO -->
-
-    <!-- TABLA CONCEPTOS -->
+    <!-- TABLA CONCEPTOS / ITEMS -->
     <section>
         <div class="container">
 
@@ -516,22 +480,27 @@ $datac = $resultadoc->fetchAll(PDO::FETCH_ASSOC);
                                     <tr>
 
                                         <th>Id</th>
-                                        <th>Clave</th>
                                         <th>Concepto</th>
                                         <th>Unidad</th>
+                                        <th>Precio</th>
                                         <th>Seleccionar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $consultac = "SELECT * FROM items WHERE estado_item=1 ORDER BY id_item";
+                                    $resultadoc = $conexion->prepare($consultac);
+                                    $resultadoc->execute();
+                                    $datades = $resultadoc->fetchAll(PDO::FETCH_ASSOC);;
                                     foreach ($datades as $datd) {
+                                        
                                     ?>
                                         <tr>
 
-                                            <td><?php echo $datd['id_concepto'] ?></td>
-                                            <td><?php echo $datd['clave_concepto'] ?></td>
-                                            <td><?php echo $datd['nom_concepto'] ?></td>
-                                            <td><?php echo $datd['unidad'] ?></td>
+                                            <td><?php echo $datd['id_item'] ?></td>
+                                            <td><?php echo $datd['descripcion'] ?></td>
+                                            <td><?php echo $datd['tipo'] ?></td>
+                                            <td><?php echo $datd['precio'] ?></td>
                                             <td></td>
                                         </tr>
                                     <?php

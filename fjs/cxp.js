@@ -15,7 +15,7 @@ $(document).ready(function () {
       }
       return columnas
     }
-  
+  //tabla2 es tabla buscar proveedor
     tablaC = $('#tabla2').DataTable({
       columnDefs: [
         {
@@ -45,35 +45,7 @@ $(document).ready(function () {
       },
     })
   
-    tablaCon = $('#tablaCon').DataTable({
-      columnDefs: [
-        {
-          targets: -1,
-          data: null,
-          defaultContent:
-            "<div class='text-center'><div class='btn-group'><button class='btn btn-sm btn-success btnSelConcepto'><i class='fas fa-hand-pointer'></i></button></div></div>",
-        },
-      ],
-  
-      //Para cambiar el lenguaje a español
-      language: {
-        lengthMenu: 'Mostrar _MENU_ registros',
-        zeroRecords: 'No se encontraron resultados',
-        info:
-          'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
-        infoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
-        infoFiltered: '(filtrado de un total de _MAX_ registros)',
-        sSearch: 'Buscar:',
-        oPaginate: {
-          sFirst: 'Primero',
-          sLast: 'Último',
-          sNext: 'Siguiente',
-          sPrevious: 'Anterior',
-        },
-        sProcessing: 'Procesando...',
-      },
-    })
-  
+    
     //TABLA DETALLE DE desechables
     tablaDetIndes = $('#tablaDetIndes').DataTable({
       paging: false,
@@ -125,7 +97,7 @@ $(document).ready(function () {
       },
     })
   
-    //TABLA DESECHABLE
+    //TABLA DESECHABLE , tabla seleccionar items boton seleccionar
     tablaDes = $('#tablaDes').DataTable({
       columnDefs: [
         {
@@ -154,45 +126,21 @@ $(document).ready(function () {
         sProcessing: 'Procesando...',
       },
     })
-  
+
+  //boton buscar provedor
     $(document).on('click', '#bproveedor', function () {
       $('.modal-header').css('background-color', '#007bff')
       $('.modal-header').css('color', 'white')
-  
       $('#modalProveedor').modal('show')
     })
-  
+
+    //boton selecionar provedor
     $(document).on('click', '#bproveedorplus', function () {
-      window.location.href = 'cntaproveedores.php'
+      window.location.href = 'cntaprovedores.php'
     })
-  
-    $(document).on('click', '#bproyectoplus', function () {
-      window.location.href = 'cntaproyecto.php'
-    })
-  
-    $(document).on('click', '#bproyecto', function () {
-      $('.modal-header').css('background-color', '#007bff')
-      $('.modal-header').css('color', 'white')
-  
-      $('#modalProyecto').modal('show')
-  
-      $('#claveconcepto').val('')
-      $('#concepto').val('')
-      $('#id_umedida').val('')
-      $('#usomat').val('')
-      $('#nom_umedida').val('')
-      $('#bmaterial').prop('disabled', true)
-      $('#clavemat').val('')
-      $('#material').val('')
-      $('#clave').val('')
-      $('#idprecio').val('')
-      $('#unidad').val('')
-  
-      $('#precio').val('')
-      $('#cantidad').val('')
-      $('#cantidad').prop('disabled', true)
-    })
-  
+
+    //funcion del boton seleccionar prov,
+    // selecciona los datos de la fila y llena los campos correspondientes
     $(document).on('click', '.btnSelprov', function () {
       fila = $(this).closest('tr')
   
@@ -205,26 +153,31 @@ $(document).ready(function () {
       $('#nombre').val(nomprov)
       $('#modalProveedor').modal('hide')
     })
-  
+
+    //BOTON GUARDAR ORDENES DE COMPRA
     $(document).on('click', '#btnGuardar', function () {
       folio = $('#folio').val()
       fecha = $('#fecha').val()
   
       id_prov = $('#id_prov').val()
       proveedor = $('#nombre').val()
-      id_proy = $('#id_proy').val()
-      proyecto = $('#proyecto').val()
-      concepto = $('#concepto').val()
-  
-      total = $('#total').val().replace(/,/g, '')
+      descripcion = $('#descripcion').val()
+      
+      id_item = $('#').val();
+      nom_item = $('#').val();
+      
+      gtotal = $('#gtotal').val().replace(/,/g, '')
       tokenid = $('#tokenid').val()
       opcion = $('#opcion').val()
-  
+
+    //validacion de campos faltantes de la orden
       if (
-        total.length != 0 &&
-        concepto.length != 0 &&
+        gtotal.length != 0 &&
+        descripcion.length != 0 &&
         id_prov.length != 0 &&
-        id_proy.length != 0
+        proveedor.length != 0 &&
+        id_item.length != 0 &&
+        nom_item.length != 0
       ) {
         $.ajax({
           type: 'POST',
@@ -235,10 +188,8 @@ $(document).ready(function () {
             folio: folio,
             id_prov: id_prov,
             proveedor: proveedor,
-            id_proy: id_proy,
-            proyecto: proyecto,
-            concepto: concepto,
-            total: total,
+            descripcion: descripcion,
+            gtotal: gtotal,
             tokenid: tokenid,
             opcion: opcion,
           },
@@ -257,7 +208,7 @@ $(document).ready(function () {
               })
   
               window.setTimeout(function () {
-                window.location.href = 'cntaordencompra.php'
+                window.location.href = 'ordencompra.php'
               }, 1500)
             }
           },
@@ -271,17 +222,8 @@ $(document).ready(function () {
         return false
       }
     })
-  
-    $(document).on('click', '.btnSelConcepto', function () {
-      fila = $(this).closest('tr')
-      idpartida = fila.find('td:eq(0)').text()
-      partida = fila.find('td:eq(2)').text()
-      $('#id_proy').val(idpartida)
-      $('#proyecto').val(partida)
-      $('#modalProyecto').modal('hide')
-    })
-  
-    //BOTON BUSCAR DESECHABLE
+
+    //BOTON BUSCAR DESECHABLE,
     $(document).on('click', '#btnInsumodes', function () {
       $('#modalDes').modal('show')
     })
@@ -289,80 +231,87 @@ $(document).ready(function () {
     // SELECCIONAR  DESECHABLE
     $(document).on('click', '.btnSelDesechable', function () {
       fila = $(this).closest('tr')
-      idconcepto = fila.find('td:eq(0)').text()
-      clave = fila.find('td:eq(1)').text()
-      concepto = fila.find('td:eq(2)').text()
-      unidad = fila.find('td:eq(3)').text()
-  
-      /*
-       */
-      $('#idconcepto').val(idconcepto)
-      $('#unidadm').val(unidad)
+      id_item = fila.find('td:eq(0)').text()
+      concepto = fila.find('td:eq(1)').text()
+      unidad = fila.find('td:eq(2)').text()
+      precio = fila.find('td:eq(3)').text()
+
+      $('#idconcepto').val(id_item)
       $('#nomconcepto').val(concepto)
-      $('#claveconcepto').val(clave)
-      $('#costou').prop('disabled', false)
+      $('#costou').val(precio)
+      $('#unidadm').val(unidad)
+      
+      $('#unidadm').prop('disabled', true)
+      $('#costou').prop('disabled', true)
       $('#cantidadconcepto').prop('disabled', false)
+      $('#desc').prop('disabled', false)
   
       $('#modalDes').modal('hide')
     })
-  
+
+
     //BOTON LIMPIAR DESECHABLE
     $(document).on('click', '#btlimpiarides', function () {
       limpiardes()
     })
   
-    //AGREGAR DESECHABLE
+    //AGREGAR DESECHABLE, ITEM A LA TABLA DETALLES
     $(document).on('click', '#btnagregarides', function () {
       folio = $('#folio').val()
-      idcon = $('#idconcepto').val()
+      id_item = $('#idconcepto').val()
       cantidad = $('#cantidadconcepto').val().replace(/,/g, '')
       concepto = $('#nomconcepto').val()
       unidad = $('#unidadm').val()
-      costo = $('#costou').val().replace(/,/g, '')
-      clave = $('#claveconcepto').val()
-      subtotal = parseFloat(costo) * parseFloat(cantidad)
+      precio = $('#costou').val().replace(/,/g, '')
+      desc = (($_POST["desc"])/100)
+      subtotal = ((parseFloat(precio) * parseFloat(cantidad))-desc)
+
+
+
       usuario = $('#nameuser').val()
       opcion = 1
   
       if (
         folio.length != 0 &&
-        idcon.length != 0 &&
+        id_item.length != 0 &&
+        concepto.length != 0 &&
         cantidad.length != 0 &&
-        costo.length != 0
+        unidad.length != 0 &&
+        precio.length != 0 &&
+        desc.length != 0 
       ) {
         $.ajax({
           type: 'POST',
-          url: 'bd/detalleorden.php',
+          url: 'bd/cruddetallecxp.php',
           dataType: 'json',
           //async: false,
           data: {
             folio: folio,
-            idcon: idcon,
-            cantidad: cantidad,
+            id_item: id_item,
             concepto: concepto,
-            opcion: opcion,
-            usuario: usuario,
-            subtotal,
-            subtotal,
+            cantidad: cantidad,
             unidad: unidad,
-            clave: clave,
-            costo: costo,
+            precio: precio,
+            subtotal: subtotal,
+            desc: desc,
+            gimporte: gimporte,
+            opcion: opcion,
+            usuario: usuario
           },
           success: function (data) {
             id_reg = data[0].id_reg
-            clave = data[0].clave
+            folio = data[0].folio
+            id_item = data[0].id_item
             concepto = data[0].concepto
             cantidad = data[0].cantidad
             unidad = data[0].unidad
             precio = data[0].precio
-            subtotal = data[0].monto
+            subtotal = data[0].subtotal
   
-            tablaDetIndes.row
-              .add([id_reg, clave, concepto, cantidad, unidad, precio, subtotal])
-              .draw()
+            tablaDetIndes.row.add([id_reg, folio,id_item, concepto, cantidad, unidad, precio, subtotal]).draw()
             tipo = 4
             $.ajax({
-              url: 'bd/sumadetalle.php',
+              url: 'bd/cruddetallecxp.php',
               type: 'POST',
               dataType: 'json',
               async: false,
@@ -422,17 +371,20 @@ $(document).ready(function () {
       $('#total').val('')
       $('#cinverso').val(false)
     }
-  
+    //funcion limpiar campos de la seccion detalles del concepto 
     function limpiardes() {
       $('#idconcepto').val('')
       $('#nomconcepto').val('')
-      $('#claveconcepto').val('')
+      $('#unidadm').val('')
       $('#cantidadconcepto').val('')
       $('#costou').val('')
+      $('#desc').val('')
       $('#costou').prop('disabled', true)
       $('#cantidadconcepto').prop('disabled', true)
+      
     }
-  
+
+    //funcion redondear decimales
     function round(value, decimals) {
       return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals)
     }
@@ -463,13 +415,13 @@ $(document).ready(function () {
               async: false,
               data: { folio: folio, tipo: tipo },
               success: function (data) {
-                 total = data
+                total = data
   
                 var myNumeral = numeral(total)
                 var valor = myNumeral.format('0,0.00')
               
                 $('#total').val(valor)
-               
+
               },
             })
           } else {
