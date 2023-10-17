@@ -1,6 +1,7 @@
 $(document).ready(function() {
-    var id, opcion;
-    opcion = 4;
+    var id, opcion, fecha, tokenid, usuario;
+    
+    
 
     tablacxp = $("#tablaCxp").DataTable({
 
@@ -34,9 +35,60 @@ $(document).ready(function() {
     });
 
     $("#btnNuevo").click(function() {
-        window.location.href ="cxp.php"
+            id = $('#folio').val()
+            fecha = $('#fechasys').val()
+            usuario = $('#nameuser').val()
+            tokenid = $('#tokenid').val()
+            opcion = $('#opcion').val()
+        
+            if (
+                fecha.length == 0 &&
+                tokeind.length == 0 &&
+                usuario.length == 0 
+            ) {
+            $.ajax({
+                type: 'POST',
+                url: 'bd/crudorden.php',
+                dataType: 'json',
+                data: {
+                    id:id,
+                    fecha: fecha,
+                    tokeind: tokeind,
+                    usuario: usuario,
 
-    });
+                    opcion: opcion
+                },
+
+                success: function (res) {
+                  if (res == 0) {
+                    Swal.fire({
+                      title: 'Error al Apartar Folio',
+                      text: 'No se puedo apartar el folio',
+                      icon: 'error',
+                    })
+                  } else {
+                    Swal.fire({
+                      title: 'Folio Apartado',
+                      text: 'Capture los items',
+                      icon: 'success',
+                    })
+        
+                    window.setTimeout(function () {
+                    window.location.href = 'cxp.php'
+                    }, 1500)
+                  }
+                },
+                })
+            } else {
+                Swal.fire({
+                title: 'Datos Faltantes',
+                text: 'Debe ingresar todos los datos',
+                icon: 'warning',
+            })
+            return false
+            }
+
+    })
 
     var fila; //capturar la fila para editar o borrar el registro
 

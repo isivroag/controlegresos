@@ -3,6 +3,9 @@ $(document).ready(function () {
   
     var id, opcion
     var operacion = $('#opcion').val()
+   //VARIABLES PARA APARTAR EL LUGAR 
+    var usuario = $('#nameuser').val()
+    var fecha = $('#fechasys').val()
   
     var textopermiso = permisos()
   
@@ -157,7 +160,7 @@ $(document).ready(function () {
     //BOTON GUARDAR ORDENES DE COMPRA
     $(document).on('click', '#btnGuardar', function () {
       folio = $('#folio').val()
-      fecha = $('#fecha').val()
+      fecha = $('#fechasys').val()
   
       id_prov = $('#id_prov').val()
       proveedor = $('#nombre').val()
@@ -230,6 +233,7 @@ $(document).ready(function () {
   
     // SELECCIONAR  DESECHABLE
     $(document).on('click', '.btnSelDesechable', function () {
+      
       fila = $(this).closest('tr')
       id_item = fila.find('td:eq(0)').text()
       concepto = fila.find('td:eq(1)').text()
@@ -241,77 +245,104 @@ $(document).ready(function () {
       $('#costou').val(precio)
       $('#unidadm').val(unidad)
       
+      
       $('#unidadm').prop('disabled', true)
       $('#costou').prop('disabled', true)
-      $('#cantidadconcepto').prop('disabled', false)
+      $('#importe').prop('disabled', true)
+      $('#gimporte').prop('disabled', true)
+      $('#cantidad').prop('disabled', false)
       $('#desc').prop('disabled', false)
-  
-      $('#modalDes').modal('hide')
-    })
 
+      
+
+      $('#modalDes').modal('hide')
+      obtImport();
+      
+    })
+//FUNCIONES OBTENER IMPORTE AUTOMATICO
+function obtImport() {
+  var costou = parseFloat(document.getElementById('costou').value) || 0;
+  var cantidad = parseInt(document.getElementById('cantidad').value) || 0;
+  var importe = costou * cantidad;
+  document.getElementById('importe').value = importe.toFixed(2);
+  obtGimport();
+}
+
+//FUNCIONES OBTENER subtotal AUTOMATICO
+    function obtGimport(){
+      var desc = parseFloat(document.getElementById('desc').value) || 0;
+      var importe = parseFloat(document.getElementById('importe').value) || 0;
+      
+      
+          var gimporte = importe - (importe * (desc/100));
+          document.getElementById('subtotal').value = gimporte.toFixed(2);
+      
+    }
 
     //BOTON LIMPIAR DESECHABLE
     $(document).on('click', '#btlimpiarides', function () {
       limpiardes()
-    })
+    });
   
     //AGREGAR DESECHABLE, ITEM A LA TABLA DETALLES
     $(document).on('click', '#btnagregarides', function () {
+      
       folio = $('#folio').val()
-      id_item = $('#idconcepto').val()
-      cantidad = $('#cantidadconcepto').val().replace(/,/g, '')
+      iditem = $('#idconcepto').val()
+      clave = $('#claveconcepto').val()
       concepto = $('#nomconcepto').val()
+      cantidad = $('#cantidad').val().replace(/,/g, '')
       unidad = $('#unidadm').val()
       precio = $('#costou').val().replace(/,/g, '')
-      desc = (($_POST["desc"])/100)
-      subtotal = ((parseFloat(precio) * parseFloat(cantidad))-desc)
+      desc = $('#desc').val()
+      importe = $('#importe').val()
+      gimporte = $('#subtotal').val()
 
 
 
       usuario = $('#nameuser').val()
-      opcion = 1
+      opcion = 1 
   
       if (
         folio.length != 0 &&
-        id_item.length != 0 &&
-        concepto.length != 0 &&
-        cantidad.length != 0 &&
-        unidad.length != 0 &&
+        iditem.length != 0 &&
+        cantidad.length != 0 &&  
         precio.length != 0 &&
         desc.length != 0 
       ) {
         $.ajax({
           type: 'POST',
-          url: 'bd/cruddetallecxp.php',
+          url: 'bd/detalleorden.php',
           dataType: 'json',
-          //async: false,
+          async: false,
           data: {
+          
             folio: folio,
-            id_item: id_item,
+            iditem: iditem,
+            clave: clave,
             concepto: concepto,
             cantidad: cantidad,
             unidad: unidad,
-            precio: precio,
-            subtotal: subtotal,
+            precio: precio, 
             desc: desc,
+            importe: importe,
             gimporte: gimporte,
             opcion: opcion,
             usuario: usuario
           },
           success: function (data) {
-            id_reg = data[0].id_reg
-            folio = data[0].folio
-            id_item = data[0].id_item
+            id_reg = data[0].id_reg //id_reg
+            clave = data[0].clave
             concepto = data[0].concepto
             cantidad = data[0].cantidad
             unidad = data[0].unidad
             precio = data[0].precio
-            subtotal = data[0].subtotal
+            gimporte = data[0].gimporte
   
-            tablaDetIndes.row.add([id_reg, folio,id_item, concepto, cantidad, unidad, precio, subtotal]).draw()
+            tablaDetIndes.row.add([id_reg, clave, concepto, cantidad, unidad, precio, gimporte]).draw()
             tipo = 4
             $.ajax({
-              url: 'bd/cruddetallecxp.php',
+              url: 'bd/sumadetalle.php',
               type: 'POST',
               dataType: 'json',
               async: false,
@@ -381,6 +412,8 @@ $(document).ready(function () {
       $('#desc').val('')
       $('#costou').prop('disabled', true)
       $('#cantidadconcepto').prop('disabled', true)
+      $('#importe').val('')
+      $('#subtotal').val('')
       
     }
 

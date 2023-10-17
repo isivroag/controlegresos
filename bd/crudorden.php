@@ -5,14 +5,16 @@ $conexion = $objeto->connect();
 
 // Recepción de los datos enviados mediante POST desde el JS   
 
-$folio = (isset($_POST['folio'])) ? $_POST['folio'] : '';
+$id = (isset($_POST['folio'])) ? $_POST['folio'] : '';
 $tokenid = (isset($_POST['tokenid'])) ? $_POST['tokenid'] : '';
-$fecha = (isset($_POST['fecha'])) ? $_POST['fecha'] : '';
+$usuario = (isset($_POST['nameuser'])) ? $_POST['nameuser'] : '';
+$fecha = (isset($_POST['fechasys'])) ? $_POST['fechasys'] : '';
+
 
 $id_prov = (isset($_POST['id_prov'])) ? $_POST['id_prov'] : '';
 $proveedor = (isset($_POST['proveedor'])) ? $_POST['proveedor'] : '';
-//$id_proy = (isset($_POST['id_proy'])) ? $_POST['id_proy'] : '';
-//$proyecto = (isset($_POST['proyecto'])) ? $_POST['proyecto'] : '';
+$id_proy = (isset($_POST['id_proy'])) ? $_POST['id_proy'] : '';
+$proyecto = (isset($_POST['proyecto'])) ? $_POST['proyecto'] : '';
 $concepto = (isset($_POST['concepto'])) ? $_POST['concepto'] : '';
 
 $total = (isset($_POST['total'])) ? $_POST['total'] : '';
@@ -20,21 +22,16 @@ $saldo = (isset($_POST['saldo'])) ? $_POST['saldo'] : '';
 
 
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
-$res = 0;
+$res = "";
 
 
-switch ($opcion) {
-    case 1: //alta
-        $consulta = "UPDATE orden set fecha='$fecha',id_prov='$id_prov',nom_prov='$proveedor',id_proyecto='$id_proy',nom_proy='$proyecto',concepto='$concepto',
-        total='$total',activo='1' WHERE folio_ord='$folio'";
+switch ($res) {
+    case 1: //alta apartado de folio
+        $consulta = "INSERT INTO cxptmp (fecha, usuario, tokenid) VALUES('$fecha', '$usuario', '$tokenid') ";			
+        $resultado = $conexion->prepare($consulta);
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $res = 1;
-
-  
-            //TERMINA EL INCREMENTO EN INVENTARIO   
-
-
 
         break;
     case 2:

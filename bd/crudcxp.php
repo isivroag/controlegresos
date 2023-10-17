@@ -5,7 +5,7 @@ $conexion = $objeto->connect();
 
 // Recepción de los datos enviados mediante POST desde el JS   
 
-$fecha = (isset($_POST['fecha'])) ? $_POST['fecha'] : '';
+$fecha = (isset($_POST['fechasys'])) ? $_POST['fechasys'] : '';
 $proveedor = (isset($_POST['id_prov'])) ? $_POST['id_prov'] : '';
 $descripcion = (isset($_POST['descripcion'])) ? $_POST['descripcion'] : '';
 $gtotal = (isset($_POST['gtotal'])) ? $_POST['gtotal'] : '';
@@ -18,7 +18,7 @@ $total = (isset($_POST[''])) ? $_POST[''] : '';
 $desc = (isset($_POST[''])) ? $_POST[''] : '';
 $total = (isset($_POST[''])) ? $_POST[''] : '';
 
-
+$usuario = (isset($_POST['nameuser'])) ? $_POST['nameuser'] : '';
 
 
 
@@ -30,14 +30,14 @@ switch($opcion){
     case 1: //alta
 
         
-        $consulta = "INSERT INTO cxp (fecha, id_prov, descripcion, subtotal, iva, total, desc, gtotal, saldo, tipo) VALUES('$fecha', '$id_prov','$descripcion', '$subtotal', '$iva','$subtotal','$desc', '$gtotal', '$saldo', '$facturado') ";			
+        $consulta = "INSERT INTO cxptmp (fecha, usuario) VALUES('$fecha', '$id_prov','$descripcion', '$subtotal', '$iva','$subtotal','$desc', '$gtotal', '$saldo', '$facturado') ";			
         $resultado = $conexion->prepare($consulta);
         $resultado->execute(); 
 
         $consulta = "SELECT * FROM cxp ORDER BY folio_cxp DESC LIMIT 1";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
-        $data=$resultado->fetchAll(PDO::FETCH_ASSOC)
+        $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         break;
     case 2: //modificación
         
